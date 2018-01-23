@@ -5,14 +5,21 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { AzureHttpClient } from './azureHttpClient';
 import { BingSearchResponse } from '../models/bingSearchResponse';
+import { ComputerVisionRequest, ComputerVisionResponse } from '../models/computerVisionResponse';
 
 @Injectable()
 export class CognitiveService {
     bingSearchAPIKey = '159a1e7ae35b4ebd9d97237a458334de';
+    computerVisionAPIKey = '9f5dc7df9099468699d4d8b584888edf';
     constructor(private http: AzureHttpClient) { }
     searchImages(searchTerm: string): Observable<BingSearchResponse> {
         return this.http.get('https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=' + searchTerm, this.bingSearchAPIKey)
             .map(response => response.json() as BingSearchResponse)
+            .catch(this.handleError);
+    }
+    analyzeImage(request: ComputerVisionRequest): Observable<ComputerVisionResponse> {
+        return this.http.post('https://australiaeast.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Description,Tags', this.computerVisionAPIKey, request)
+            .map(response => response.json() as ComputerVisionResponse)
             .catch(this.handleError);
     }
     private handleError(error: any): Promise<any> {
