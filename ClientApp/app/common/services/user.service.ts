@@ -14,9 +14,8 @@ export class UserService {
     constructor(private http: Http, @Inject('BASE_URL')originUrl: string) {
         this.originUrl = originUrl;
     }
-
     public getUser(): Observable<User> {
-        return this.http.get('${this.originUrl}/.auth/me')
+        return this.http.get(this.originUrl + '/.auth/me')
             .map(response => {
                 try {
                     this.aadUser = response.json()[0] as AADUser;
@@ -34,10 +33,7 @@ export class UserService {
                                 break;
                         }
                     });
-                    
-                    console.log("userid: " + user.userId);
-                    console.log("first name: " + user.firstName);
-                    
+   
                     return user;
                 }
                 catch (Exception) {
