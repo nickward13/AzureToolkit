@@ -34,7 +34,10 @@ export class UserService {
                                 break;
                         }
                     });
-   
+                    
+                    console.log("userid: " + user.userId);
+                    console.log("first name: " + user.firstName);
+                    
                     return user;
                 }
                 catch (Exception) {
