@@ -19,7 +19,12 @@ export class SearchComponent {
     isAnalyzing = false;
     currentItemSaved: boolean;
 
-    constructor(private cognitiveService: CognitiveService, private azureToolkitService: AzureToolkitService) { }
+    constructor(private cognitiveService: CognitiveService, private azureToolkitService: AzureToolkitService) {
+        this.searchResults = null;
+        this.currentAnalytics = null;
+        this.currentItem = null;
+        this.currentItemSaved = false;
+     }
 
     search(searchTerm: string) {
         this.searchResults = null;
