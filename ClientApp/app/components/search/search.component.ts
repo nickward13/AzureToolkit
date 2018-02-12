@@ -44,13 +44,15 @@ export class SearchComponent {
     }
 
     saveImage() {
-        let transferObject = {
-            url: this.currentItem.thumbnailUrl,
-            encodingFormat: this.currentItem.encodingFormat,
-            id: this.currentItem.imageId
+        if (this.currentItem != null) {
+            let transferObject = {
+                url: this.currentItem.thumbnailUrl,
+                encodingFormat: this.currentItem.encodingFormat,
+                id: this.currentItem.imageId
+            }
+            this.azureToolkitService.saveImage(transferObject).subscribe(saveSuccessful => {
+                this.currentItemSaved = saveSuccessful;
+            });
         }
-        this.azureToolkitService.saveImage(transferObject).subscribe(saveSuccessful => {
-            this.currentItemSaved = saveSuccessful;
-        });
     }
 }
