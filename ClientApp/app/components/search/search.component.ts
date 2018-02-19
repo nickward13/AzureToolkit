@@ -21,13 +21,14 @@ export class SearchComponent implements OnInit {
     currentItem: ImageResult | null;
     isAnalyzing = false;
     currentItemSaved: boolean;
-    user: User;
+    user: User | null;
 
     constructor(private cognitiveService: CognitiveService, private azureToolkitService: AzureToolkitService, private userService: UserService) {
         this.searchResults = null;
         this.currentAnalytics = null;
         this.currentItem = null;
         this.currentItemSaved = false;
+        this.user = null;
     }
 
     ngOnInit(): void {
@@ -57,7 +58,7 @@ export class SearchComponent implements OnInit {
     }
 
     saveImage() {
-        if (this.currentItem != null) {
+        if (this.currentItem != null && this.user != null && this.currentAnalytics != null) {
             let transferObject: ImagePostRequest = {
                 userId: this.user.userId,
                 url: this.currentItem.thumbnailUrl,
