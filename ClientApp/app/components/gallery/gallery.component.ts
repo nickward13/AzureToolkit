@@ -16,12 +16,10 @@ export class GalleryComponent implements OnInit {
     constructor(private userService: UserService, private azureToolkitService: AzureToolkitService) { }
 
     ngOnInit(): void {
-        this.userService.getUser().subscribe(user => {
-            this.user = user;
-   
-            this.azureToolkitService.getImages(this.user.userId).subscribe(images => {
-                this.savedImages = images;
-            })
-        });
+        this.userService.getUser().subscribe(user => this.user = user);
+        console.log(this.user);
+        if(this.user != null){
+            this.azureToolkitService.getImages(this.user.userId).subscribe(images => this.savedImages = images);
+        }
     }
 }
