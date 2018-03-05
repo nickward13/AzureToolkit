@@ -8,8 +8,8 @@
                 <span class="tag label" [ngClass]="{'label-default': tag.confidence >= .75, 'label-warning': tag.confidence >= .5 && tag.confidence < .75, 'label-danger': tag.confidence < .5}" *ngFor="let tag of savedImage.tags">{{tag.name}}</span>
             </div>
         </div>
-        <div *ngIf="!savedImages">
-            <h4>No images to display</h4>
-        </div>
+    </div>
+    <div *ngIf="!savedImages">
+        <h4>No images to display</h4>
     </div>
 </div>
