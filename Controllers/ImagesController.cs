@@ -27,6 +27,13 @@ namespace WebApplicationBasic.Controllers
             _context = context;
         }
 
+        [HttpGet("{userId}")]
+        public IActionResult GetImages(string userID)
+        {
+            var images = _context.SavedImages.Where(image => image.UserId == userID);
+            return Ok(images);
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostImage([FromBody]ImagePostRequest request)
         {
